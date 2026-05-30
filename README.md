@@ -75,7 +75,7 @@ A core requirement of this system is to mathematically guarantee that all cited 
 ## Local Setup
 
 ### Prerequisites
-- Python 3.11+
+- Python 3.10.9
 - API keys: OpenAI, Pinecone (see `.env.example`)
 
 ### 1. Clone & Configure
