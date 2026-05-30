@@ -172,7 +172,13 @@ async function generateImage(prompt) {
   dom.sendBtn.disabled = true;
 
   const { bubbleEl } = appendAssistantMessage();
-  bubbleEl.innerHTML = '<em>Generating image (this may take 10-15 seconds)...</em>';
+  bubbleEl.innerHTML = `<div class="thinking-process" style="display: flex; align-items: center; gap: 8px; color: var(--primary-color); font-size: 0.95em; font-style: italic; font-weight: 500;">
+    <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
+      <style>.spinner_V8m1{transform-origin:center;animation:spinner_zKoa 2s linear infinite}@keyframes spinner_zKoa{100%{transform:rotate(360deg)}}</style>
+      <circle cx="12" cy="12" r="9" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="15 41" class="spinner_V8m1" />
+    </svg>
+    <span class="thinking-text">Painting your vision (this may take 10-15 seconds)...</span>
+  </div>`;
 
   try {
     const response = await fetch(`${API_BASE}/api/image`, {
