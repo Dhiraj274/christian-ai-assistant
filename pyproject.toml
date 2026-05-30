@@ -1,0 +1,87 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["backend"]
+
+[project]
+name = "christian-ai-assistant"
+version = "1.0.0"
+description = "Production-grade Christianity-Focused AI Assistant with multi-agent hallucination prevention"
+requires-python = ">=3.10"
+dependencies = [
+    # Web framework
+    "fastapi>=0.111.0",
+    "uvicorn[standard]>=0.30.0",
+    "python-multipart>=0.0.9",
+    "sse-starlette>=2.1.0",
+
+    # AI / LLM
+    "anthropic>=0.30.0",
+    "openai>=1.35.0",
+    "langgraph>=0.1.9",
+    "langchain>=0.2.6",
+    "langchain-anthropic>=0.1.19",
+    "langchain-openai>=0.1.14",
+    "langchain-community>=0.2.6",
+
+    # Vector DB
+    "pinecone-client>=4.1.0",
+    "langchain-pinecone>=0.1.1",
+
+    # Data & validation
+    "pydantic>=2.7.4",
+    "pydantic-settings>=2.3.4",
+
+    # Observability
+    "langfuse>=2.38.0",
+
+    # Retry / resilience
+    "tenacity>=8.4.1",
+
+    # Storage
+    "aiosqlite>=0.20.0",
+
+    # HTTP client
+    "httpx>=0.27.0",
+
+    # Env
+    "python-dotenv>=1.0.1",
+
+    # Sparse retrieval (BM25)
+    "rank-bm25>=0.2.2",
+
+    # Data loading
+    "requests>=2.32.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.5.0",
+    "mypy>=1.10.0",
+    "pytest>=8.2.0",
+    "pytest-asyncio>=0.23.7",
+    "pytest-httpx>=0.30.0",
+    "httpx>=0.27.0",
+]
+evals = [
+    "ragas>=0.1.12",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["backend/tests"]

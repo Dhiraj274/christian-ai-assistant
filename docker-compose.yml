@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: christian_ai_app
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_ENV=production
+      - LOG_LEVEL=INFO
+      # The .env file should be used to inject secrets:
+      # - OPENAI_API_KEY
+      # - PINECONE_API_KEY
+    volumes:
+      - ./backend/data:/app/backend/data
+    restart: unless-stopped

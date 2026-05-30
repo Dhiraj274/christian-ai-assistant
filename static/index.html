@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChristianAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/styles.css?v=2" />
+</head>
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="logo">
+      <span class="logo-icon">✝</span>
+      <span class="logo-text">ChristianAI</span>
+    </div>
+    <div class="topbar-controls">
+      <button id="new-chat-btn" class="clean-select" style="margin-right: 8px;">+ New Chat</button>
+      <div class="verification-badge" id="verification-badge" style="display:none;">Verifier Ready</div>
+      <select id="denomination-select" class="clean-select">
+        <option value="General">General</option>
+        <option value="Protestant">Protestant</option>
+        <option value="Catholic">Catholic</option>
+        <option value="Orthodox">Orthodox</option>
+      </select>
+    </div>
+  </header>
+
+  <main class="chat-container">
+    <div class="messages-area" id="messages-container">
+      <div class="welcome-screen" id="welcome-screen">
+        <h1 class="welcome-title">What can I help with today?</h1>
+        <div class="suggestion-grid" id="suggestion-list">
+          <button class="suggestion-btn" data-query="Explain justification by faith">
+            <div class="sugg-icon">📖</div>
+            <div class="sugg-text">Explain justification by faith</div>
+          </button>
+          <button class="suggestion-btn" data-query="What does Matthew 5:3 say about humility?">
+            <div class="sugg-icon">🕊️</div>
+            <div class="sugg-text">Matthew 5:3 on humility</div>
+          </button>
+          <button class="suggestion-btn" data-query="Explain the Eucharist from a Catholic perspective">
+            <div class="sugg-icon">🍷</div>
+            <div class="sugg-text">Catholic view of the Eucharist</div>
+          </button>
+          <button class="suggestion-btn" data-query="What is predestination?">
+            <div class="sugg-icon">🤔</div>
+            <div class="sugg-text">What is predestination?</div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-area">
+      <div class="input-wrapper">
+        <button class="tool-btn" id="image-toggle-btn" title="Create an image">
+          🖼️ Image
+        </button>
+        <textarea id="chat-input" placeholder="Ask anything..." rows="1"></textarea>
+        <button id="send-btn" class="send-btn" disabled>
+          ⬆
+        </button>
+      </div>
+      <div class="input-footer">
+        ChristianAI can make mistakes. Consider verifying important theological points.
+        <span id="char-count">0 / 2000</span>
+      </div>
+    </div>
+  </main>
+  
+  <div id="citation-tooltip" class="citation-tooltip" role="tooltip" aria-hidden="true"></div>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="/static/app.js?v=3"></script>
+</body>
+</html>
