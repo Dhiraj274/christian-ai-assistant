@@ -41,7 +41,7 @@ const dom = {
 
 function init() {
   bindEvents();
-  
+
   dom.denominationSelect.value = state.denomination;
   if (state.messageHistory.length > 0) {
     if (dom.welcomeScreen) dom.welcomeScreen.style.display = 'none';
@@ -52,14 +52,14 @@ function init() {
       } else if (msg.role === 'assistant') {
         const { bubbleEl } = appendAssistantMessage();
         if (msg.content.startsWith('[Image Generated:')) {
-           const urlMatch = msg.content.match(/\[Image Generated: (.*?)\]/);
-           if (urlMatch) {
-               bubbleEl.innerHTML = `<img src="${urlMatch[1]}" style="max-width: 100%; max-height: 400px; object-fit: contain; border-radius: 8px; margin-top: 10px;" />`;
-           } else {
-               bubbleEl.innerHTML = renderResponseText(msg.content);
-           }
+          const urlMatch = msg.content.match(/\[Image Generated: (.*?)\]/);
+          if (urlMatch) {
+            bubbleEl.innerHTML = `<img src="${urlMatch[1]}" style="max-width: 100%; max-height: 400px; object-fit: contain; border-radius: 8px; margin-top: 10px;" />`;
+          } else {
+            bubbleEl.innerHTML = renderResponseText(msg.content);
+          }
         } else {
-           bubbleEl.innerHTML = renderResponseText(msg.content);
+          bubbleEl.innerHTML = renderResponseText(msg.content);
         }
       }
     });
@@ -155,13 +155,13 @@ function appendAssistantMessage() {
   const bubbleEl = document.createElement('div');
   bubbleEl.className = 'message-bubble';
   bubbleEl.innerHTML = '<span class="cursor"></span>';
-  
+
   messageEl.innerHTML = `<div class="message-avatar">✝</div>`;
   const bodyEl = document.createElement('div');
   bodyEl.className = 'message-body';
   bodyEl.appendChild(bubbleEl);
   messageEl.appendChild(bodyEl);
-  
+
   dom.messagesContainer.appendChild(messageEl);
   scrollToBottom();
   return { messageEl, bubbleEl };
@@ -177,7 +177,7 @@ async function generateImage(prompt) {
       <style>.spinner_V8m1{transform-origin:center;animation:spinner_zKoa 2s linear infinite}@keyframes spinner_zKoa{100%{transform:rotate(360deg)}}</style>
       <circle cx="12" cy="12" r="9" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="15 41" class="spinner_V8m1" />
     </svg>
-    <span class="thinking-text">Painting your vision (this may take 10-15 seconds)...</span>
+    <span class="thinking-text">Painting your vision (this may take 30-60 seconds)...</span>
   </div>`;
 
   try {
@@ -197,7 +197,7 @@ async function generateImage(prompt) {
     if (data.safety_rewritten) {
       imgHtml += `<p style="font-size: 0.85em; color: var(--text-secondary); margin-top: 8px;"><em>Prompt adjusted for reverence/safety: "${data.revised_prompt}"</em></p>`;
     }
-    
+
     bubbleEl.innerHTML = imgHtml;
     state.messageHistory.push({ role: 'assistant', content: `[Image Generated: ${data.url}]` });
     saveState();
@@ -218,11 +218,11 @@ async function streamAssistantResponse(query) {
 
   const { bubbleEl } = appendAssistantMessage();
   let currentText = '';
-  
+
   bubbleEl.innerHTML = `<div class="thinking-process" style="color: var(--text-secondary); font-size: 0.9em; font-style: italic;">
     <span class="thinking-icon">⚙️</span> <span class="thinking-text">Evaluating input safety...</span>
   </div>`;
-  
+
   let isThinking = true;
 
   try {
@@ -271,10 +271,10 @@ async function streamAssistantResponse(query) {
           } else if (event.type === 'verification') {
             updateVerificationBadge(event.data?.passed ? 'passed' : 'failed');
           }
-        } catch (e) {}
+        } catch (e) { }
       }
     }
-    
+
     bubbleEl.innerHTML = renderResponseText(currentText);
     state.messageHistory.push({ role: 'assistant', content: currentText });
     saveState();
@@ -311,11 +311,11 @@ function renderResponseText(text) {
       return `<span class="citation-badge" onclick="showCitationTooltip(this, '${ref}')">${ref}</span>`;
     }
   );
-  
+
   if (typeof marked !== 'undefined') {
     return marked.parse(rendered);
   }
-  
+
   // Fallback
   rendered = rendered.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
@@ -324,7 +324,7 @@ function renderResponseText(text) {
   return `<p>${rendered}</p>`;
 }
 
-window.showCitationTooltip = async function(el, ref) {
+window.showCitationTooltip = async function (el, ref) {
   const tooltip = dom.citationTooltip;
   if (!state.verseCache[ref]) {
     tooltip.innerHTML = `<em>Loading ${ref}...</em>`;
