@@ -1,4 +1,4 @@
-﻿aiohappyeyeballs==2.6.2
+aiohappyeyeballs==2.6.2
 aiohttp==3.13.5
 aiohttp-retry==2.9.1
 aiosignal==1.4.0
@@ -14,7 +14,6 @@ backoff==2.2.1
 backports.asyncio.runner==1.2.0
 certifi==2026.5.20
 charset-normalizer==3.4.7
--e git+https://github.com/Dhiraj274/christian-ai-assistant.git@391678471b7361339c428fcc3fd55bbdb6603404#egg=christian_ai_assistant
 click==8.4.1
 colorama==0.4.6
 distro==1.9.0
