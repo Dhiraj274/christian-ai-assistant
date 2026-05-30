@@ -135,7 +135,8 @@ def create_app() -> FastAPI:
 
     # Health check
     @app.get("/health", response_model=HealthResponse, tags=["system"])
-    async def health_check() -> HealthResponse:
+    @app.head("/health", include_in_schema=False)
+    async def health_check() -> HealthResponse | JSONResponse:
         """Returns service health status and dependency availability."""
         services: dict[str, bool] = {
             "openai": bool(settings.openai_api_key),
@@ -149,7 +150,8 @@ def create_app() -> FastAPI:
         )
 
     @app.get("/", response_class=HTMLResponse, include_in_schema=False)
-    async def root() -> HTMLResponse:
+    @app.head("/", include_in_schema=False)
+    async def root() -> HTMLResponse | JSONResponse:
         """Serve the frontend UI at the root URL."""
         import os
         index_path = os.path.join(
